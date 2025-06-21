@@ -1,0 +1,10 @@
+flask
+pymongo
+PyMuPDF
+pandas
+sentence-transformers
+torch
+transformers
+nltk
+scikit-learn
+numpy

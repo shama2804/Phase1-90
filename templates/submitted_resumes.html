@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Resumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 2px solid #000000;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: #666666;
+            font-weight: 400;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .jd-info {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #cccccc;
+        }
+
+        .jd-info h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .jd-details {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .jd-detail {
+            background: #f5f5f5;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #000000;
+            border: 1px solid #cccccc;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .resume-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #cccccc;
+            transition: all 0.3s ease;
+        }
+
+        .resume-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: #000000;
+        }
+
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .candidate-info h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .candidate-details {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #666666;
+            font-size: 0.9rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .resume-id {
+            background: #f5f5f5;
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #cccccc;
+        }
+
+        .view-btn {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .no-resumes {
+            text-align: center;
+            color: #cccccc;
+            font-style: italic;
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .no-resumes i {
+            font-size: 4rem;
+            color: #cccccc;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .no-file {
+            background: #f5f5f5;
+            color: #000000;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #cccccc;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .resume-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .candidate-details {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .jd-details {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-file-alt"></i> Submitted Resumes</h1>
+            <p class="subtitle">JD ID: {{ jd_id }} | Total: {{ total_resumes }} resumes</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <i class="fas fa-users"></i> {{ total_resumes }} Candidates
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-file-pdf"></i> PDF Files
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-database"></i> Database Stored
+                </div>
+            </div>
+            <div style="margin-top: 1rem;">
+                <a href="/hr/hr_dashboard" class="view-btn" style="background: linear-gradient(135deg, #666666, #333333);">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </a>
+                <a href="/hr/rank_resumes/{{ jd_id }}" class="view-btn" style="background: linear-gradient(135deg, #333333, #000000); margin-left: 1rem;">
+                    <i class="fas fa-star"></i> View Rankings
+                </a>
+            </div>
+        </div>
+
+        {% if jd_id %}
+        <div class="jd-info">
+            <h3><i class="fas fa-briefcase"></i> Job Description Details</h3>
+            <div class="jd-details">
+                <div class="jd-detail">
+                    <i class="fas fa-hashtag"></i> ID: {{ jd_id }}
+                </div>
+                <div class="jd-detail">
+                    <i class="fas fa-file-text"></i> {{ total_resumes }} Applications
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if resumes %}
+            {% for resume in resumes %}
+                <div class="resume-card">
+                    <div class="resume-header">
+                        <div class="candidate-info">
+                            <h3><i class="fas fa-user"></i> {{ resume.personal_details.name or "Unnamed Candidate" }}</h3>
+                            <div class="candidate-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-envelope"></i> {{ resume.personal_details.email or "No email provided" }}
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-phone"></i> {{ resume.personal_details.phone or "No phone number" }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resume-id">
+                            <i class="fas fa-hashtag"></i> {{ resume._id }}
+                        </div>
+                    </div>
+
+                    {% if resume.resume_filepath %}
+                        {% set filename = resume.resume_filepath.split('/')[-1] %}
+                        <a class="view-btn" href="/uploads/{{ filename }}" target="_blank">
+                            <i class="fas fa-eye"></i> View Resume PDF
+                        </a>
+                    {% else %}
+                        <div class="no-file">
+                            <i class="fas fa-exclamation-triangle"></i> Resume file not available
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-resumes">
+                <i class="fas fa-inbox"></i>
+                <p>No resumes found for this job description.</p>
+                <p>Resumes will appear here once candidates submit their applications.</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

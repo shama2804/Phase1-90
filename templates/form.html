@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Submission Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 2px solid #000000;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: #666666;
+            font-weight: 400;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            border: 1px solid #cccccc;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #000000;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            padding: 0.75rem 1rem;
+            border: 2px solid #cccccc;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            background: #ffffff;
+            color: #000000;
+            transition: all 0.3s ease;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .file-upload {
+            border: 2px dashed #cccccc;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            background: #f5f5f5;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .file-upload:hover {
+            border-color: #000000;
+            background: #fafafa;
+        }
+
+        .file-upload i {
+            font-size: 2rem;
+            color: #666666;
+            margin-bottom: 1rem;
+        }
+
+        .file-upload-text {
+            color: #000000;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .file-upload-subtext {
+            color: #666666;
+            font-size: 0.85rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .auto-fill-section {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .auto-fill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .auto-fill-btn {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .auto-fill-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .auto-fill-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auto-fill-status {
+            margin-top: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .auto-fill-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .auto-fill-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .auto-fill-loading {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .add-btn {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+            margin-top: 1rem;
+        }
+
+        .add-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .experience-entry, .project-entry {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+
+        .education-entry {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border: 2px solid #e9ecef;
+            position: relative;
+        }
+
+        .remove-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #dc3545;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: #c82333;
+            transform: scale(1.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .jd-info {
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid #666666;
+        }
+
+        .jd-info h3 {
+            color: #000000;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .jd-details {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .jd-detail {
+            background: #ffffff;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: #000000;
+            border: 1px solid #cccccc;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .error-message {
+            background: #f5f5f5;
+            color: #000000;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #cccccc;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .success-message {
+            background: #f5f5f5;
+            color: #000000;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #cccccc;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        /* Skills bubble styling */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            min-height: 50px;
+            padding: 0.5rem;
+            border: 2px dashed #cccccc;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+
+        .skill-bubble {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-family: 'Times New Roman', Times, serif;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .skill-bubble:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-bubble .remove-skill {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .skill-bubble .remove-skill:hover {
+            background: #ff4444;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .skill-input-container {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .skill-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #cccccc;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-family: 'Times New Roman', Times, serif;
+            background: #ffffff;
+            color: #000000;
+        }
+
+        .skill-input:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .add-skill-btn {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .add-skill-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .add-skill-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .skills-placeholder {
+            color: #999999;
+            font-style: italic;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .jd-details {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-file-upload"></i> Resume Submission</h1>
+            <p class="subtitle">Submit your resume for job consideration</p>
+        </div>
+
+        {% if jd_id %}
+        <div class="jd-info">
+            <h3><i class="fas fa-briefcase"></i> Applying for Job Description</h3>
+            <div class="jd-details">
+                <div class="jd-detail">
+                    <i class="fas fa-hashtag"></i> ID: {{ jd_id }}
+                </div>
+                <div class="jd-detail">
+                    <i class="fas fa-building"></i> Company: {{ jd_info.company_name if jd_info else "Not specified" }}
+                </div>
+                <div class="jd-detail">
+                    <i class="fas fa-briefcase"></i> Position: {{ jd_info.job_title if jd_info else "Not specified" }}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="error-message">
+            <i class="fas fa-exclamation-triangle"></i> {{ error }}
+        </div>
+        {% endif %}
+
+        {% if success %}
+        <div class="success-message">
+            <i class="fas fa-check-circle"></i> {{ success }}
+        </div>
+        {% endif %}
+
+        <div class="form-container">
+            <form method="POST" enctype="multipart/form-data">
+                {% if error_msg %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ error_msg }}
+                </div>
+                {% endif %}
+                
+                <!-- Resume Upload and Auto-fill Section -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-file-pdf"></i> Resume Upload & Auto-fill
+                    </div>
+                    
+                    <div class="auto-fill-section">
+                        <div class="auto-fill-header">
+                            <div class="form-group full-width">
+                                <label class="form-label">Upload Resume (PDF) *</label>
+                                <div class="file-upload" onclick="document.getElementById('resume_file').click()">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <div class="file-upload-text">Click to upload your resume</div>
+                                    <div class="file-upload-subtext">PDF files only, max 10MB</div>
+                                </div>
+                                <input type="file" id="resume_file" name="resume" accept=".pdf" style="display: none;" required>
+                                <input type="hidden" name="resume_filename" id="resume_filename" value="{{ resume_filename if resume_filename else '' }}">
+                                <input type="hidden" name="jd_id" id="jd_id" value="{{ jd_id if jd_id else '' }}">
+                            </div>
+                        </div>
+                        
+                        <button type="button" id="auto_fill_btn" class="auto-fill-btn" onclick="autoFillForm()" disabled>
+                            <i class="fas fa-magic"></i> Auto-fill from Resume
+                        </button>
+                        
+                        <div id="auto_fill_status" class="auto-fill-status" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-user"></i> Personal Information
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" name="name" id="name" class="form-input" value="{{ form_data.name if form_data else '' }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email *</label>
+                            <input type="email" name="email" id="email" class="form-input" value="{{ form_data.email if form_data else '' }}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" name="phone" id="phone" class="form-input" value="{{ form_data.phone if form_data else '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Location</label>
+                            <input type="text" name="location" id="location" class="form-input" value="{{ form_data.location if form_data else '' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-graduation-cap"></i> Education
+                    </div>
+                    <div id="education-container">
+                        <div class="education-entry">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Degree</label>
+                                    <input type="text" name="education[0][degree]" class="form-input" placeholder="e.g., Bachelor of Technology">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Specialization</label>
+                                    <input type="text" name="education[0][specialization]" class="form-input" placeholder="e.g., Computer Science">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">University/College</label>
+                                    <input type="text" name="education[0][university]" class="form-input" placeholder="e.g., University of Technology">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">CGPA</label>
+                                    <input type="text" name="education[0][cgpa]" class="form-input" placeholder="e.g., 8.5">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Graduation Year</label>
+                                    <input type="text" name="education[0][graduation_year]" class="form-input" placeholder="e.g., 2023">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Additional Details</label>
+                                    <textarea name="education[0][additional_details]" class="form-textarea" placeholder="Any additional education details..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addEducation()">
+                        <i class="fas fa-plus"></i> Add Education
+                    </button>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-briefcase"></i> Experience
+                    </div>
+                    <div id="experience-container">
+                        <div class="experience-entry">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Job Title</label>
+                                    <input type="text" name="experience[0][job_title]" class="form-input" placeholder="e.g., Software Engineer">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Company</label>
+                                    <input type="text" name="experience[0][current_company]" class="form-input" placeholder="e.g., Tech Corp">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Duration</label>
+                                    <input type="text" name="experience[0][employment_duration]" class="form-input" placeholder="e.g., Jan 2023 - Present">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Responsibilities</label>
+                                    <textarea name="experience[0][job_responsibilities]" class="form-textarea" placeholder="Describe your key responsibilities and achievements..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addExperience()">
+                        <i class="fas fa-plus"></i> Add Experience
+                    </button>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-tools"></i> Skills
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">Skills & Technologies</label>
+                        <div class="skill-input-container">
+                            <input type="text" id="skill-input" class="skill-input" placeholder="Enter a skill and press Enter or click Add">
+                            <button type="button" id="add-skill-btn" class="add-skill-btn" onclick="addSkill()">
+                                <i class="fas fa-plus"></i> Add
+                            </button>
+                        </div>
+                        <div id="skills-container" class="skills-container">
+                            <div class="skills-placeholder">No skills added yet. Start typing above to add skills.</div>
+                        </div>
+                        <input type="hidden" name="skills" id="skills-hidden" value="">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-project-diagram"></i> Projects
+                    </div>
+                    <div id="projects-container">
+                        <div class="project-entry">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Project Title</label>
+                                    <input type="text" name="projects[0][title]" class="form-input" placeholder="e.g., E-commerce Website">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tech Stack</label>
+                                    <input type="text" name="projects[0][tech_stack]" class="form-input" placeholder="e.g., React, Node.js, MongoDB">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Duration</label>
+                                    <input type="text" name="projects[0][duration]" class="form-input" placeholder="e.g., 3 months">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Description</label>
+                                    <textarea name="projects[0][description]" class="form-textarea" placeholder="Describe your project, features, and outcomes..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn" onclick="addProject()">
+                        <i class="fas fa-plus"></i> Add Project
+                    </button>
+                </div>
+
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-link"></i> Links
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">LinkedIn</label>
+                            <input type="url" name="linkedin" id="linkedin" class="form-input" value="{{ form_data.linkedin if form_data else '' }}" placeholder="https://linkedin.com/in/...">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">GitHub</label>
+                            <input type="url" name="github" id="github" class="form-input" value="{{ form_data.github if form_data else '' }}" placeholder="https://github.com/...">
+                        </div>
+                    </div>
+                    <div class="form-group full-width">
+                        <label class="form-label">Portfolio/Website</label>
+                        <input type="url" name="portfolio" id="portfolio" class="form-input" value="{{ form_data.portfolio if form_data else '' }}" placeholder="https://...">
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> Submit Application
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Get JD ID from template
+        const jdId = '{{ jd_id if jd_id else "" }}';
+        
+        // File upload preview and auto-fill button enable/disable
+        document.getElementById('resume_file').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const autoFillBtn = document.getElementById('auto_fill_btn');
+            const resumeFilenameInput = document.getElementById('resume_filename');
+            
+            if (file) {
+                const uploadDiv = document.querySelector('.file-upload');
+                uploadDiv.innerHTML = `
+                    <i class="fas fa-file-pdf" style="color: #000000;"></i>
+                    <div class="file-upload-text">${file.name}</div>
+                    <div class="file-upload-subtext">${(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                `;
+                uploadDiv.style.borderColor = '#000000';
+                uploadDiv.style.background = '#fafafa';
+                
+                // Update hidden input with filename
+                resumeFilenameInput.value = file.name;
+                
+                // Enable auto-fill button
+                autoFillBtn.disabled = false;
+            } else {
+                // Clear hidden input
+                resumeFilenameInput.value = '';
+                autoFillBtn.disabled = true;
+            }
+        });
+
+        // Auto-fill form from resume
+        function autoFillForm() {
+            const fileInput = document.getElementById('resume_file');
+            const file = fileInput.files[0];
+            const statusDiv = document.getElementById('auto_fill_status');
+            const autoFillBtn = document.getElementById('auto_fill_btn');
+            
+            if (!file) {
+                showStatus('Please select a resume file first.', 'error');
+                return;
+            }
+
+            // Show loading state
+            autoFillBtn.disabled = true;
+            autoFillBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Parsing Resume...';
+            showStatus('Parsing resume and extracting information...', 'loading');
+
+            // Create FormData for upload
+            const uploadFormData = new FormData();
+            uploadFormData.append('resume', file);
+            if (jdId) {
+                uploadFormData.append('jd_id', jdId);
+            }
+
+            // Send to server for parsing
+            fetch('/upload', {
+                method: 'POST',
+                body: uploadFormData
+            })
+            .then(response => response.text())
+            .then(html => {
+                // Parse the HTML response to extract form data
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Extract form data from the response
+                const extractedData = {
+                    name: doc.getElementById('name')?.value || '',
+                    email: doc.getElementById('email')?.value || '',
+                    phone: doc.getElementById('phone')?.value || '',
+                    location: doc.getElementById('location')?.value || '',
+                    education: doc.getElementById('education')?.value || '',
+                    skills: doc.getElementById('skills')?.value || '',
+                    linkedin: doc.getElementById('linkedin')?.value || '',
+                    github: doc.getElementById('github')?.value || '',
+                    portfolio: doc.getElementById('portfolio')?.value || ''
+                };
+
+                // Fill the form fields
+                let filledCount = 0;
+                Object.keys(extractedData).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element && extractedData[key]) {
+                        element.value = extractedData[key];
+                        filledCount++;
+                    }
+                });
+
+                // Handle education data - fill the first education entry
+                const educationText = doc.getElementById('education')?.value || '';
+                if (educationText) {
+                    const firstEducationEntry = document.querySelector('.education-entry');
+                    if (firstEducationEntry) {
+                        // Try to extract structured data from the text
+                        const lines = educationText.split('\n');
+                        let degree = '', specialization = '', university = '', cgpa = '', graduationYear = '';
+                        
+                        lines.forEach(line => {
+                            if (line.includes(' - ')) {
+                                const parts = line.split(' - ');
+                                if (parts.length >= 2) {
+                                    degree = parts[0].trim();
+                                    if (parts[1].includes('Graduated:')) {
+                                        graduationYear = parts[1].replace('Graduated:', '').trim();
+                                    }
+                                    if (parts[1].includes('CGPA:')) {
+                                        cgpa = parts[1].replace('CGPA:', '').trim();
+                                    }
+                                }
+                            }
+                        });
+                        
+                        const degreeInput = firstEducationEntry.querySelector('input[name*="degree"]');
+                        const specializationInput = firstEducationEntry.querySelector('input[name*="specialization"]');
+                        const universityInput = firstEducationEntry.querySelector('input[name*="university"]');
+                        const cgpaInput = firstEducationEntry.querySelector('input[name*="cgpa"]');
+                        const graduationYearInput = firstEducationEntry.querySelector('input[name*="graduation_year"]');
+                        
+                        if (degreeInput && degree) degreeInput.value = degree;
+                        if (specializationInput && specialization) specializationInput.value = specialization;
+                        if (universityInput && university) universityInput.value = university;
+                        if (cgpaInput && cgpa) cgpaInput.value = cgpa;
+                        if (graduationYearInput && graduationYear) graduationYearInput.value = graduationYear;
+                        
+                        if (degree || specialization || university || cgpa || graduationYear) filledCount++;
+                    }
+                }
+
+                // Handle experience data - fill the first experience entry
+                const experienceText = doc.getElementById('experience')?.value || '';
+                if (experienceText) {
+                    const firstExperienceEntry = document.querySelector('.experience-entry');
+                    if (firstExperienceEntry) {
+                        // Try to extract structured data from the text
+                        const lines = experienceText.split('\n');
+                        let jobTitle = '', company = '', duration = '', responsibilities = '';
+                        
+                        lines.forEach(line => {
+                            if (line.includes('Job Title:')) {
+                                jobTitle = line.replace('Job Title:', '').trim();
+                            } else if (line.includes('Company:')) {
+                                company = line.replace('Company:', '').trim();
+                            } else if (line.includes('Duration:')) {
+                                duration = line.replace('Duration:', '').trim();
+                            } else if (line.includes('Responsibilities:')) {
+                                responsibilities = line.replace('Responsibilities:', '').trim();
+                            }
+                        });
+                        
+                        const jobTitleInput = firstExperienceEntry.querySelector('input[name*="job_title"]');
+                        const companyInput = firstExperienceEntry.querySelector('input[name*="current_company"]');
+                        const durationInput = firstExperienceEntry.querySelector('input[name*="employment_duration"]');
+                        const responsibilitiesInput = firstExperienceEntry.querySelector('textarea[name*="job_responsibilities"]');
+                        
+                        if (jobTitleInput && jobTitle) jobTitleInput.value = jobTitle;
+                        if (companyInput && company) companyInput.value = company;
+                        if (durationInput && duration) durationInput.value = duration;
+                        if (responsibilitiesInput && responsibilities) responsibilitiesInput.value = responsibilities;
+                        
+                        if (jobTitle || company || duration || responsibilities) filledCount++;
+                    }
+                }
+
+                // Handle projects data - fill the first project entry
+                const projectsText = doc.getElementById('projects')?.value || '';
+                if (projectsText) {
+                    const firstProjectEntry = document.querySelector('.project-entry');
+                    if (firstProjectEntry) {
+                        // Try to extract structured data from the text
+                        const projectBlocks = projectsText.split('\n\n');
+                        if (projectBlocks.length > 0) {
+                            const firstProject = projectBlocks[0];
+                            const lines = firstProject.split(' | ');
+                            
+                            let title = '', techStack = '', description = '', duration = '';
+                            
+                            lines.forEach(line => {
+                                if (line.includes('Title:')) {
+                                    title = line.replace('Title:', '').trim();
+                                } else if (line.includes('Tech:')) {
+                                    techStack = line.replace('Tech:', '').trim();
+                                } else if (line.includes('Description:')) {
+                                    description = line.replace('Description:', '').trim();
+                                }
+                            });
+                            
+                            const titleInput = firstProjectEntry.querySelector('input[name*="title"]');
+                            const techStackInput = firstProjectEntry.querySelector('input[name*="tech_stack"]');
+                            const descriptionInput = firstProjectEntry.querySelector('textarea[name*="description"]');
+                            
+                            if (titleInput && title) titleInput.value = title;
+                            if (techStackInput && techStack) techStackInput.value = techStack;
+                            if (descriptionInput && description) descriptionInput.value = description;
+                            
+                            if (title || techStack || description) filledCount++;
+                        }
+                    }
+                }
+
+                // Handle skills data - populate skills bubbles
+                const skillsText = extractedData.skills || '';
+                if (skillsText) {
+                    // Clear existing skills
+                    const skillsContainer = document.getElementById('skills-container');
+                    skillsContainer.innerHTML = '';
+                    
+                    // Split skills by comma and add each as a bubble
+                    const skills = skillsText.split(',').map(s => s.trim()).filter(s => s);
+                    skills.forEach(skill => {
+                        addSkillBubble(skill);
+                    });
+                    
+                    // Update hidden input
+                    updateSkillsHiddenInput();
+                    
+                    if (skills.length > 0) filledCount++;
+                }
+
+                if (filledCount > 0) {
+                    showStatus(`✅ Resume parsed successfully! ${filledCount} fields have been auto-filled.`, 'success');
+                } else {
+                    showStatus('⚠️ Resume parsed but no data could be extracted. Please fill the form manually.', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showStatus('❌ Error parsing resume. Please try again or fill the form manually.', 'error');
+            })
+            .finally(() => {
+                // Reset button state
+                autoFillBtn.disabled = false;
+                autoFillBtn.innerHTML = '<i class="fas fa-magic"></i> Auto-fill from Resume';
+            });
+        }
+
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('auto_fill_status');
+            statusDiv.textContent = message;
+            statusDiv.className = `auto-fill-status auto-fill-${type}`;
+            statusDiv.style.display = 'block';
+            
+            // Hide success message after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusDiv.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Form validation
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const requiredFields = this.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    isValid = false;
+                    field.style.borderColor = '#000000';
+                } else {
+                    field.style.borderColor = '#cccccc';
+                }
+            });
+            
+            if (!isValid) {
+                e.preventDefault();
+                alert('Please fill in all required fields.');
+            }
+        });
+
+        // Add experience entry
+        function addExperience() {
+            const container = document.getElementById('experience-container');
+            const entryCount = container.children.length;
+            
+            const newEntry = document.createElement('div');
+            newEntry.className = 'experience-entry';
+            newEntry.innerHTML = `
+                <button type="button" class="remove-btn" onclick="removeEntry(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Job Title</label>
+                        <input type="text" name="experience[${entryCount}][job_title]" class="form-input" placeholder="e.g., Software Engineer">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Company</label>
+                        <input type="text" name="experience[${entryCount}][current_company]" class="form-input" placeholder="e.g., Tech Corp">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Duration</label>
+                        <input type="text" name="experience[${entryCount}][employment_duration]" class="form-input" placeholder="e.g., Jan 2023 - Present">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Responsibilities</label>
+                        <textarea name="experience[${entryCount}][job_responsibilities]" class="form-textarea" placeholder="Describe your key responsibilities and achievements..."></textarea>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(newEntry);
+        }
+
+        // Add project entry
+        function addProject() {
+            const container = document.getElementById('projects-container');
+            const entryCount = container.children.length;
+            
+            const newEntry = document.createElement('div');
+            newEntry.className = 'project-entry';
+            newEntry.innerHTML = `
+                <button type="button" class="remove-btn" onclick="removeEntry(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Project Title</label>
+                        <input type="text" name="projects[${entryCount}][title]" class="form-input" placeholder="e.g., E-commerce Website">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tech Stack</label>
+                        <input type="text" name="projects[${entryCount}][tech_stack]" class="form-input" placeholder="e.g., React, Node.js, MongoDB">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Duration</label>
+                        <input type="text" name="projects[${entryCount}][duration]" class="form-input" placeholder="e.g., 3 months">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea name="projects[${entryCount}][description]" class="form-textarea" placeholder="Describe your project, features, and outcomes..."></textarea>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(newEntry);
+        }
+
+        // Remove entry (experience, project, or education)
+        function removeEntry(button) {
+            const entry = button.parentElement;
+            entry.remove();
+            
+            // Reindex remaining entries
+            const container = entry.parentElement;
+            const entries = container.querySelectorAll('.experience-entry, .project-entry, .education-entry');
+            
+            entries.forEach((entry, index) => {
+                const inputs = entry.querySelectorAll('input, textarea');
+                inputs.forEach(input => {
+                    const name = input.getAttribute('name');
+                    if (name) {
+                        const newName = name.replace(/\[\d+\]/, `[${index}]`);
+                        input.setAttribute('name', newName);
+                    }
+                });
+            });
+        }
+
+        // Add education entry
+        function addEducation() {
+            const container = document.getElementById('education-container');
+            const entryCount = container.children.length;
+            
+            const newEntry = document.createElement('div');
+            newEntry.className = 'education-entry';
+            newEntry.innerHTML = `
+                <button type="button" class="remove-btn" onclick="removeEntry(this)">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Degree</label>
+                        <input type="text" name="education[${entryCount}][degree]" class="form-input" placeholder="e.g., Bachelor of Technology">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Specialization</label>
+                        <input type="text" name="education[${entryCount}][specialization]" class="form-input" placeholder="e.g., Computer Science">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">University/College</label>
+                        <input type="text" name="education[${entryCount}][university]" class="form-input" placeholder="e.g., University of Technology">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">CGPA</label>
+                        <input type="text" name="education[${entryCount}][cgpa]" class="form-input" placeholder="e.g., 8.5">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Graduation Year</label>
+                        <input type="text" name="education[${entryCount}][graduation_year]" class="form-input" placeholder="e.g., 2023">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Additional Details</label>
+                        <textarea name="education[${entryCount}][additional_details]" class="form-textarea" placeholder="Any additional education details..."></textarea>
+                    </div>
+                </div>
+            `;
+            
+            container.appendChild(newEntry);
+        }
+
+        // Add skill to skills container
+        function addSkill() {
+            const skillInput = document.getElementById('skill-input');
+            const skill = skillInput.value.trim();
+            
+            if (skill) {
+                addSkillBubble(skill);
+                skillInput.value = '';
+                updateSkillsHiddenInput();
+            }
+        }
+
+        // Add skill bubble to container
+        function addSkillBubble(skillText) {
+            const container = document.getElementById('skills-container');
+            const placeholder = container.querySelector('.skills-placeholder');
+            
+            // Remove placeholder if it exists
+            if (placeholder) {
+                placeholder.remove();
+            }
+            
+            const skillBubble = document.createElement('div');
+            skillBubble.className = 'skill-bubble';
+            skillBubble.innerHTML = `
+                ${skillText}
+                <button type="button" class="remove-skill" onclick="removeSkill(this.parentElement)">
+                    <i class="fas fa-times"></i>
+                </button>
+            `;
+            
+            container.appendChild(skillBubble);
+        }
+
+        // Remove skill from skills container
+        function removeSkill(bubble) {
+            bubble.remove();
+            updateSkillsHiddenInput();
+            
+            // Show placeholder if no skills left
+            const container = document.getElementById('skills-container');
+            if (container.children.length === 0) {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'skills-placeholder';
+                placeholder.textContent = 'No skills added yet. Start typing above to add skills.';
+                container.appendChild(placeholder);
+            }
+        }
+
+        // Update hidden input with all skills
+        function updateSkillsHiddenInput() {
+            const container = document.getElementById('skills-container');
+            const skillBubbles = container.querySelectorAll('.skill-bubble');
+            const skills = Array.from(skillBubbles).map(bubble => {
+                // Get text content excluding the remove button
+                return bubble.childNodes[0].textContent.trim();
+            });
+            
+            const hiddenInput = document.getElementById('skills-hidden');
+            hiddenInput.value = skills.join(', ');
+        }
+
+        // Handle Enter key in skill input
+        document.getElementById('skill-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addSkill();
+            }
+        });
+
+        // Initialize skills from form data if available
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillsHidden = document.getElementById('skills-hidden');
+            if (skillsHidden && skillsHidden.value) {
+                const skills = skillsHidden.value.split(',').map(s => s.trim()).filter(s => s);
+                skills.forEach(skill => addSkillBubble(skill));
+                updateSkillsHiddenInput();
+            }
+        });
+    </script>
+</body>
+</html>

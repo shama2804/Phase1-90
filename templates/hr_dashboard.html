@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #2d2d2d 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 2px solid #000000;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            color: #666666;
+            font-weight: 400;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .jd-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #cccccc;
+            transition: all 0.3s ease;
+        }
+
+        .jd-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: #000000;
+        }
+
+        .jd-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .jd-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .jd-company {
+            color: #666666;
+            font-size: 0.95rem;
+            font-weight: 500;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .jd-id {
+            background: #f5f5f5;
+            color: #000000;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #cccccc;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            justify-content: center;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #333333, #000000);
+            color: #ffffff;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #cccccc;
+            font-style: italic;
+            margin-top: 3rem;
+            font-size: 1.1rem;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #cccccc;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header {
+                padding: 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .jd-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .btn-group {
+                width: 100%;
+                justify-content: stretch;
+            }
+            
+            .btn {
+                flex: 1;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-tachometer-alt"></i> HR Dashboard</h1>
+            <p class="subtitle">Manage Job Descriptions and Resume Rankings</p>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <i class="fas fa-briefcase"></i> {{ jds|length }} Job Descriptions
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-users"></i> Active Listings
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-chart-line"></i> Analytics Ready
+                </div>
+            </div>
+        </div>
+
+        {% if jds %}
+            {% for jd in jds %}
+                <div class="jd-card">
+                    <div class="jd-header">
+                        <div>
+                            <div class="jd-title">
+                                <i class="fas fa-briefcase"></i> {{ jd.job_title or "Untitled Position" }}
+                            </div>
+                            <div class="jd-company">
+                                <i class="fas fa-building"></i> {{ jd.company_name or "Company not specified" }}
+                            </div>
+                        </div>
+                        <div class="jd-id">
+                            <i class="fas fa-hashtag"></i> {{ jd._id }}
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <a href="/hr/view_resumes/{{ jd._id }}" class="btn btn-primary">
+                            <i class="fas fa-file-alt"></i> View Resumes
+                        </a>
+                        <a href="/hr/rank_resumes/{{ jd._id }}" class="btn btn-success">
+                            <i class="fas fa-star"></i> View Rankings
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-inbox"></i>
+                <p>No job descriptions found. Create your first job posting to get started!</p>
+                <a href="/hr/jd_form" class="btn btn-primary" style="margin-top: 1rem;">
+                    <i class="fas fa-plus"></i> Create Job Description
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
